@@ -30,6 +30,7 @@ else
   exit
 fi
 
+
 echo "Host localhost
    StrictHostKeyChecking no
    UserKnownHostsFile=/dev/null" | sudo tee -a /etc/ssh/ssh_config
@@ -42,7 +43,9 @@ echo "Host $domain_var
 #==
 #== 1. Packages
 #==
-sudo apt-get update
+apt-get update -y
+apt-get upgrade -y
+apt-get install sudo -y
 sudo apt-get install -y wget curl build-essential checkinstall libxml2-dev libxslt-dev libcurl4-openssl-dev libreadline6-dev libc6-dev libssl-dev zlib1g-dev libicu-dev redis-server openssh-server git-core libyaml-dev
 
 
@@ -145,8 +148,8 @@ sudo apt-get install -y mysql-server mysql-client libmysqlclient-dev
 cd /home/gitlab
 sudo -u gitlab -H git clone https://github.com/gitlabhq/gitlabhq.git gitlab
 cd /home/gitlab/gitlab
-# Checkout v4
-sudo -u gitlab -H git checkout 4-0-stable
+# Checkout v5.4
+sudo -u gitlab -H git checkout 5-4-stable
 
 # Copy the example GitLab config
 sudo -u gitlab -H cp config/gitlab.yml.example config/gitlab.yml
@@ -161,7 +164,7 @@ sudo -u gitlab -H cp config/unicorn.rb.example config/unicorn.rb
 
 cd /home/gitlab/gitlab
 
-sudo gem install charlock_holmes --version '0.6.9'
+sudo gem install charlock_holmes --version '0.6.9.4'
 sudo -u gitlab -H bundle install --deployment --without development postgres test 
 
 sudo -u gitlab -H git config --global user.name "GitLab"
