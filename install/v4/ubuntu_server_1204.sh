@@ -148,8 +148,8 @@ sudo apt-get install -y mysql-server mysql-client libmysqlclient-dev
 cd /home/gitlab
 sudo -u gitlab -H git clone https://github.com/gitlabhq/gitlabhq.git gitlab
 cd /home/gitlab/gitlab
-# Checkout v5.4
-sudo -u gitlab -H git checkout 5-4-stable
+# Checkout v4
+sudo -u gitlab -H git checkout 4-0-stable
 
 # Copy the example GitLab config
 sudo -u gitlab -H cp config/gitlab.yml.example config/gitlab.yml
@@ -164,7 +164,7 @@ sudo -u gitlab -H cp config/unicorn.rb.example config/unicorn.rb
 
 cd /home/gitlab/gitlab
 
-sudo gem install charlock_holmes --version '0.6.9.4'
+sudo gem install charlock_holmes --version '0.6.9'
 sudo -u gitlab -H bundle install --deployment --without development postgres test 
 
 sudo -u gitlab -H git config --global user.name "GitLab"
